@@ -1,20 +1,13 @@
 package gfg.binarytree;
 
-// Java program to insert element in binary tree
 import java.util.ArrayDeque;
 import java.util.LinkedList;
 import java.util.Queue;
-public class Main {
-
-    /* A binary tree node has key, pointer to
-    left child and a pointer to right child */
+public class BinaryTree {
     static class Node {
         int key;
         Node left, right;
-
-        // constructor
-        Node(int key)
-        {
+        Node(int key){
             this.key = key;
             left = null;
             right = null;
@@ -23,49 +16,14 @@ public class Main {
     static Node root;
     static Node temp = root;
 
-    /* Inorder traversal of a binary tree*/
-    static void inorder(Node temp)
-    {
+    static void inorder(Node temp){
         if (temp == null)
             return;
-
         inorder(temp.left);
         System.out.print(temp.key + " ");
         inorder(temp.right);
     }
 
-    /*function to insert element in binary tree */
-    static void insert(Node temp, int key)
-    {
-
-        if (temp == null) {
-            root = new Node(key);
-            return;
-        }
-        Queue<Node> q = new LinkedList<Node>();
-        q.add(temp);
-
-        // Do level order traversal until we find
-        // an empty place.
-        while (!q.isEmpty()) {
-            temp = q.peek();
-            q.remove();
-
-            if (temp.left == null) {
-                temp.left = new Node(key);
-                break;
-            }
-            else
-                q.add(temp.left);
-
-            if (temp.right == null) {
-                temp.right = new Node(key);
-                break;
-            }
-            else
-                q.add(temp.right);
-        }
-    }
     public static void deleteNode(Node root, int val){
 
         Node temp = root;
@@ -141,6 +99,7 @@ public class Main {
 
     }
     // Driver code
+
     public static void main(String args[])
     {
         root = new Node(10);

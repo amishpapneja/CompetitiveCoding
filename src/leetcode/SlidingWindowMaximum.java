@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 public class SlidingWindowMaximum {
     public static void main(String[] args) {
@@ -25,6 +22,33 @@ public class SlidingWindowMaximum {
 //        max(arr,3);
     }
 
+    /**
+     * O(nk)
+     *
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int[] maxSlidingWindow(int[] nums, int k) {
+        int i = 0;
+        int j = 0;
+        int[] result = new int[nums.length - k + 1];
+        int pointer = 0;
+        PriorityQueue<Integer> q = new PriorityQueue<>(Collections.reverseOrder());
+
+        while (j < nums.length) {
+            while (j - i + 1 <= k) {
+                q.add(nums[j]);
+                j++;
+            }
+            // System.out.println(q);
+            result[pointer] = q.peek();
+            pointer++;
+            q.remove(nums[i]);
+            i++;
+        }
+        return result;
+    }
 
     public static int[] max(int[] nums, int k){
         Deque<Integer> deque
@@ -63,7 +87,7 @@ public class SlidingWindowMaximum {
         return arrResult;
 //        return null;
     }
-    public static int[] maxSlidingWindow(int[] nums, int k) {
+    /*public static int[] maxSlidingWindow(int[] nums, int k) {
         Deque<Integer> deque
                 = new LinkedList<Integer>();
 
@@ -94,7 +118,7 @@ public class SlidingWindowMaximum {
         }
 
         return arrResult;
-    }
+    }*/
 
     public static int[] maxSlidingWindow2(int[] a, int k) {
         int n = a.length;
